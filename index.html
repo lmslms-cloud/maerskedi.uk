@@ -1,109 +1,170 @@
+<!-- Built for L&S LT offsite workshop - A3 Prototype Demo - 05-FEB-2026 -->
+<!-- Integration Change Portal — Change Request -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Customer Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Integration Change Portal - Change Request</title>
   <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #121a2b;
+      --card: #18233a;
+      --accent: #2f7df6;
+      --text: #e6eefc;
+      --muted: #97a4c0;
+      --ring: rgba(47,125,246,0.45);
+    }
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(47,125,246,0.15), transparent 60%),
+                  radial-gradient(1000px 500px at -10% 0%, rgba(111,66,193,0.15), transparent 60%),
+                  var(--bg);
+      color: var(--text);
     }
-
-    .container {
-      background-color: #1e1e1e;
-      padding: 30px;
-      border-radius: 12px;
-      width: 350px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-
-    h2 {
+    header {
+      padding: 28px 16px 10px;
       text-align: center;
-      margin-bottom: 20px;
     }
+    .brand { display:flex; align-items:center; justify-content:center; gap:12px; }
+    .brand img { height: 34px; }
+    h1 { margin: 10px 0 0; font-size: 1.8rem; letter-spacing: 0.3px; }
+    p.sub { margin: 6px 0 0; color: var(--muted); }
 
-    .form-group {
-      margin-bottom: 15px;
+    .container { max-width: 860px; margin: 20px auto 60px; padding: 0 16px; }
+    .card {
+      background: linear-gradient(180deg, rgba(24,35,58,0.9), rgba(18,26,43,0.95));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      overflow: hidden;
     }
+    .card-header { padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
+    .card-header h2 { margin: 0; font-size: 1.1rem; color: var(--muted); font-weight: 600; letter-spacing: 0.2px; }
+    form { padding: 20px; }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 14px;
-      color: #bbbbbb;
-    }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
 
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #333;
-      background-color: #2a2a2a;
-      color: #fff;
-      font-size: 14px;
-    }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field label { font-size: 0.95rem; color: var(--text); }
 
-    input:focus {
+    .input, select, .radio-group {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 12px 12px;
       outline: none;
-      border-color: #4caf50;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--ring);
     }
 
+    .radio-group { display: flex; gap: 16px; align-items: center; padding: 10px 12px; }
+    .radio-option { display: flex; align-items: center; gap: 8px; }
+
+    .actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; }
     button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background-color: #4caf50;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s;
+      appearance: none; border: 1px solid rgba(255,255,255,0.08); background: var(--accent);
+      color: white; padding: 12px 16px; border-radius: 10px; font-weight: 600; cursor: pointer;
+      transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 10px 24px rgba(47,125,246,0.25);
     }
+    button:hover { filter: brightness(1.05); }
+    button:active { transform: translateY(1px); }
+    .btn-secondary { background: transparent; color: var(--text); }
 
-    button:hover {
-      background-color: #45a049;
-    }
+    footer { color: var(--muted); text-align: center; padding: 24px; font-size: 0.9rem; }
+
+    .policy-note { max-width: 860px; margin: -36px auto 20px; color: var(--muted); font-size: 0.85rem; padding: 0 16px; }
   </style>
 </head>
 <body>
+  <header>
+        Team: Three Musketeers
+    <h1>Integration Change Portal — Change Request</h1>
+    <p class="sub">Submit a new or change request for integration updates</p>
+  </header>
+
 
   <div class="container">
-    <h2>Customer Details</h2>
-    <form>
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="Enter full name">
+    <div class="card">
+      <div class="card-header">
+        <h2>Request Details</h2>
       </div>
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="Enter email">
-      </div>
+      <!-- On submit, navigate to "Virtual assistant.html" as requested -->
+      <form action="virtual_chatbot.html" method="get">
+        <div class="grid">
+          <!-- Select Request Type (radio) -->
+          <div class="field" style="grid-column: 1 / -1;">
+            <label for="requestType">Select Request Type</label>
+            <div class="radio-group" role="radiogroup" aria-labelledby="requestType">
+              <label class="radio-option">
+                <input type="radio" name="requestType" value="New Request" required />
+                <span>New Request</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="requestType" value="Change Request" />
+                <span>Change Request</span>
+              </label>
+            </div>
+          </div>
 
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" placeholder="Enter phone number">
-      </div>
+          <!-- Customer Name -->
+          <div class="field">
+            <label for="customerName">Customer Name</label>
+            <input class="input" type="text" id="customerName" name="customerName" placeholder="Enter customer name" required />
+          </div>
 
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" id="address" placeholder="Enter address">
-      </div>
+          <!-- Business line -->
+          <div class="field">
+            <label for="businessLine">Business line</label>
+            <input class="input" type="text" id="businessLine" name="businessLine" placeholder="e.g., Ocean, Logistics & Services" />
+          </div>
 
-      <div class="form-group">
-        <label for="customerId">Customer ID</label>
-        <input type="text" id="customerId" placeholder="Enter ID">
-      </div>
+          <!-- Business Function -->
+          <div class="field">
+            <label for="businessFunction">Business Function</label>
+            <input class="input" type="text" id="businessFunction" name="businessFunction" placeholder="e.g., Finance, Operations" />
+          </div>
 
-      <button type="submit">Submit</button>
-    </form>
+          <!-- Select Region -->
+          <div class="field">
+            <label for="region">Select Region</label>
+            <select id="region" name="region">
+              <option value="">Select a region</option>
+              <option>AMER</option>
+              <option>EMEA</option>
+              <option>APAC</option>
+              <option>Global</option>
+            </select>
+          </div>
+
+          <!-- Partner Contact -->
+          <div class="field">
+            <label for="partnerContact">Partner Contact</label>
+            <input class="input" type="text" id="partnerContact" name="partnerContact" placeholder="Contact name / email" />
+          </div>
+
+          <!-- Desired Go-Live Date -->
+          <div class="field">
+            <label for="goLiveDate">Desired Go-Live Date</label>
+            <input class="input" type="date" id="goLiveDate" name="goLiveDate" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="reset" class="btn-secondary">Reset</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
 
 </body>
